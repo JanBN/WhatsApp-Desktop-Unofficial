@@ -1,6 +1,9 @@
-# <img src="promo.jpg" width="45" align="left">&nbsp;WhatsApp-Desktop-Unofficial
+# <img src="media/icon.png" width="45" align="left">&nbsp;WhatsApp-Desktop-Unofficial
 
 > Unofficial WhatsApp app
+
+<img src="promo.jpg" align="center">
+
 
 *Heavily inspired and adapted from [whatsdesktop](https://github.com/mawie81/whatsdesktop) by [Marcel Wiehle](https://github.com/mawie81).*
 
