@@ -7,6 +7,8 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const shell = electron.shell;
 const Tray = electron.Tray;
+const files = require('./files');
+const ipc =  electron.ipcMain;
 
 let mainWindow;
 let appIcon;
@@ -18,19 +20,21 @@ function updateBadge(title) {
 
   if (isOSX) {
     app.dock.setBadge(messageCount ? messageCount[1] : '');
-    if (messageCount) {
+    if (messageCount)
+    {
       app.dock.bounce('informational');
     }
   }
 
   if (messageCount) {
-    appIcon.setImage(path.join(__dirname, 'media', 'logo-tray-blue.png'));
+    appIcon.setImage(path.join(__dirname, 'media', 'tray-notification.png'));
   } else {
-    appIcon.setImage(path.join(__dirname, 'media', 'logo-tray.png'));
+    appIcon.setImage(path.join(__dirname, 'media', 'tray.png'));
   }
 }
 
-function createMainWindow() {
+function createMainWindow()
+{
   const windowStateKeeper = require('electron-window-state');
 
   const mainWindowState = windowStateKeeper({
@@ -48,31 +52,39 @@ function createMainWindow() {
     height: mainWindowState.height,
     minWidth: 400,
     minHeight: 200,
+    'auto-hide-menu-bar': true,
     webPreferences: {
-      nodeIntegration: false,
+      nodeIntegration: true,
       webSecurity: false,
       plugins: true
     }
   });
 
+  // win.openDevTools();
+
   mainWindowState.manage(win);
 
-  win.loadURL('https://web.whatsapp.com', {
+  win.loadURL('file://' + __dirname + '/index.html', {
     userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'
   });
+
   win.on('closed', () => app.quit);
   win.on('page-title-updated', (e, title) => updateBadge(title));
   win.on('close', e => {
     if (process.platform === 'darwin' && !win.forceClose) {
       e.preventDefault();
       win.hide();
-    } else if (process.platform === 'win32' && configStore.get('closeToTray')) {
+    }
+    else
+    if (process.platform === 'win32' && configStore.get('closeToTray', true) )
+    {
       win.hide();
       e.preventDefault();
     }
   });
+
   win.on('minimize', () => {
-    if (process.platform === 'win32' && configStore.get('minimizeToTray')) {
+    if (process.platform === 'win32' && configStore.get('minimizeToTray', true)) {
       win.hide();
     }
   });
@@ -80,12 +92,32 @@ function createMainWindow() {
 }
 
 function createTray() {
-  appIcon = new Tray(path.join(__dirname, 'media', 'logo-tray.png'));
-  appIcon.setPressedImage(path.join(__dirname, 'media', 'logo-tray-white.png'));
+  appIcon = new Tray(path.join(__dirname, 'media', 'tray.png'));
+  appIcon.setPressedImage(path.join(__dirname, 'media', 'tray.png'));
   appIcon.setContextMenu(appMenu.trayMenu);
+   // appIcon.setToolTip('This is my application.');
 
   appIcon.on('double-click', () => {
-    mainWindow.show();
+
+    if (mainWindow.isVisible())
+    {
+      mainWindow.hide();
+    }
+    else
+    {
+      mainWindow.show();
+    }
+  });
+
+  appIcon.on('click', () => {
+    if (mainWindow.isVisible())
+    {
+      mainWindow.hide();
+    }
+    else
+    {
+      mainWindow.show();
+    }
   });
 }
 
@@ -96,6 +128,8 @@ app.on('ready', () => {
   createTray();
 
   const page = mainWindow.webContents;
+
+  appMenu.webContents = page;
 
   page.on('dom-ready', () => {
     mainWindow.show();
@@ -108,6 +142,25 @@ app.on('ready', () => {
 
   page.on('did-finish-load', () => {
     mainWindow.setTitle(app.getName());
+  });
+
+  ipc.on('did-finish-load-from-renderer', function(event, arg)
+  {
+    if (configStore.get('theme') == 'clean')
+    {
+       files.getThemeCss('clean', css =>
+       {
+          mainWindow.webContents.send('set-theme', css);
+      });
+    }
+    else
+    {
+    }
+  });
+
+  ipc.on('ctrl+w__pressed', function(event, arg)
+  {
+    mainWindow.hide();
   });
 });
 

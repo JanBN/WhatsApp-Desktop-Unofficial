@@ -7,12 +7,16 @@ const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
 const shell = electron.shell;
 const appName = app.getName();
+ const ipc =  electron.ipcMain;
+ const files = require('./files');
 
 function restoreWindow() {
   const win = BrowserWindow.getAllWindows()[0];
   win.show();
   return win;
 }
+
+let webContents = null;
 
 const trayTpl = [
   {
@@ -25,7 +29,7 @@ const trayTpl = [
     type: 'separator'
   },
   {
-    label: `Quit ${appName}`,
+    label: `Quit`,
     click() {
       app.exit(0);
     }
@@ -36,10 +40,10 @@ const darwinTpl = [
   {
     label: appName,
     submenu: [
-      {
-        label: `About ${appName}`,
-        role: 'about'
-      },
+      // {
+      //   label: `About ${appName}`,
+      //   role: 'about'
+      // },
       {
         type: 'separator'
       },
@@ -180,33 +184,67 @@ const linuxTpl = [
 ];
 
 const winTpl = [
+  // {
+  //   label: 'Edit',
+  //   submenu: [
+  //     {
+  //       label: 'Cut',
+  //       accelerator: 'CmdOrCtrl+X',
+  //       role: 'cut'
+  //     },
+  //     {
+  //       label: 'Copy',
+  //       accelerator: 'CmdOrCtrl+C',
+  //       role: 'copy'
+  //     },
+  //     {
+  //       label: 'Paste',
+  //       accelerator: 'CmdOrCtrl+V',
+  //       role: 'paste'
+  //     }
+  //   ]
+  // },
+
   {
-    label: 'Edit',
+    label: 'Theme',
     submenu: [
       {
-        label: 'Cut',
-        accelerator: 'CmdOrCtrl+X',
-        role: 'cut'
+        label: 'Default',
+        type: 'radio',
+        checked: configStore.get('theme', '') == 'default',
+        click(item)
+        {
+          configStore.set('theme', 'default');
+          // module.exports.webContents.send('set-default-theme', 'ping');
+          module.exports.webContents.send('reload');
+        }
       },
       {
-        label: 'Copy',
-        accelerator: 'CmdOrCtrl+C',
-        role: 'copy'
+        label: 'Clean',
+        type: 'radio',
+        checked: configStore.get('theme', '') == 'clean',
+        click(item) {
+          configStore.set('theme', 'clean');
+
+          module.exports.webContents.send('reload');
+            // files.getThemeCss('clean', css =>
+            // {
+            // // module.exports.webContents.send('set-theme', css);
+            // });
+
+        }
       },
-      {
-        label: 'Paste',
-        accelerator: 'CmdOrCtrl+V',
-        role: 'paste'
-      }
     ]
   },
+
+
   {
     label: 'Settings',
     submenu: [
       {
         label: 'Minimize to tray',
         type: 'checkbox',
-        checked: configStore.get('minimizeToTray'),
+        checked: configStore.get('minimizeToTray', true),
         click(item) {
           configStore.set('minimizeToTray', item.checked);
         }
@@ -214,41 +252,42 @@ const winTpl = [
       {
         label: 'Close to tray',
         type: 'checkbox',
-        checked: configStore.get('closeToTray'),
+        checked: configStore.get('closeToTray', true),
         click(item) {
           configStore.set('closeToTray', item.checked);
         }
-      }
+      },
+
     ]
   },
-  {
-    label: 'Help',
-    role: 'help'
-  }
+  // {
+  //   label: 'Help',
+  //   role: 'help'
+  // }
 ];
 
-const helpSubmenu = [
-  {
-    label: `${appName} Website...`,
-    click() {
-      shell.openExternal('https://github.com/mawie81/whatsdesktop');
-    }
-  },
-  {
-    label: 'Report an Issue...',
-    click() {
-      const body = `
-**Please succinctly describe your issue and steps to reproduce it.**
+// const helpSubmenu = [
+//   {
+//     label: `${appName} Website...`,
+//     click() {
+//       shell.openExternal('https://github.com/mawie81/whatsdesktop');
+//     }
+//   },
+//   {
+//     label: 'Report an Issue...',
+//     click() {
+//       const body = `
+// **Please succinctly describe your issue and steps to reproduce it.**
 
--
+// -
 
-${app.getName()} ${app.getVersion()}
-${process.platform} ${process.arch} ${os.release()}`;
+// ${app.getName()} ${app.getVersion()}
+// ${process.platform} ${process.arch} ${os.release()}`;
 
-      shell.openExternal(`https://github.com/mawie81/whatsdesktop/issues/new?body=${encodeURIComponent(body)}`);
-    }
-  }
-];
+//       shell.openExternal(`https://github.com/mawie81/whatsdesktop/issues/new?body=${encodeURIComponent(body)}`);
+//     }
+//   }
+// ];
 
 let tpl;
 if (process.platform === 'darwin') {
@@ -259,9 +298,10 @@ if (process.platform === 'darwin') {
   tpl = linuxTpl;
 }
 
-tpl[tpl.length - 1].submenu = helpSubmenu;
+// tpl[tpl.length - 1].submenu = helpSubmenu;
 
 module.exports = {
   mainMenu: Menu.buildFromTemplate(tpl),
-  trayMenu: Menu.buildFromTemplate(trayTpl)
+  trayMenu: Menu.buildFromTemplate(trayTpl),
+  webContents: webContents
 };

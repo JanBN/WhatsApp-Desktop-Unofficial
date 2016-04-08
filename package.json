@@ -1,14 +1,14 @@
 {
-  "name": "whatsdesktop",
-  "productName": "WhatsDesktop",
-  "version": "1.5.0",
+  "name": "WhatsApp-Desktop-Unofficial",
+  "productName": "WhatsApp-Desktop-Unofficial",
+  "version": "1.0.0",
   "description": "Unofficial WhatsApp app",
   "license": "MIT",
-  "repository": "mawie81/whatsdesktop",
+  "repository": "JanBN/WhatsApp-Desktop-Unofficial",
   "author": {
-    "name": "Marcel Wiehle",
-    "email": "marcel@wiehle.me",
-    "url": "http://marcel.wiehle.me"
+    "name": "Jan Pivarcek",
+    "email": "jan.pivarcek@blowingnose.com",
+    "url": "http://blowingnose.com"
   },
   "engines": {
     "node": ">=4"
@@ -21,7 +21,8 @@
     "build-osx": "electron-packager . $npm_package_productName --overwrite --out=dist --ignore='^/dist$' --prune --platform=darwin --arch=x64 --icon=media/logo.icns --app-bundle-id=me.wiehle.marcel.whatsdesktop --app-version=$npm_package_version --version=$npm_package_electronVersion && cd dist/WhatsDesktop-darwin-x64 && zip -ryXq9 ../WhatsDesktop-osx-${npm_package_version}.zip WhatsDesktop.app",
     "build-mas": "electron-packager . $npm_package_productName --overwrite --out=dist --ignore='^/dist$' --prune --platform=mas --arch=x64 --icon=media/logo.icns --app-bundle-id=me.wiehle.marcel.whatsdesktop --app-version=$npm_package_version --version=$npm_package_electronVersion && cd dist/WhatsDesktop-mas-x64 && zip -ryXq9 ../WhatsDesktop-mas-${npm_package_version}.zip WhatsDesktop.app",
     "build-linux": "electron-packager . $npm_package_productName --overwrite --out=dist --ignore='^/dist$' --prune --platform=linux --arch=x64 --app-bundle-id=me.wiehle.marcel.whatsdesktop --app-version=$npm_package_version --version=$npm_package_electronVersion && cd dist/WhatsDesktop-linux-x64/ && zip -ryq9 ../WhatsDesktop-linux-\"$npm_package_version\".zip *",
-    "build-windows": "electron-packager . $npm_package_productName --overwrite --out=dist --ignore='^/dist$' --prune --platform=win32 --arch=ia32 --icon=media/logo.ico --version=$npm_package_electronVersion --version-string.ProductName=$npm_package_productName --version-string.ProductVersion=$npm_package_electronVersion && cd dist/WhatsDesktop-win32-ia32/ && zip -ryq9 ../WhatsDesktop-win32-\"$npm_package_version\".zip *"
+    "build-windows": "electron-packager . $npm_package_productName --overwrite --out=dist --ignore='^/dist$' --prune --platform=win32 --arch=ia32 --icon=media/logo.ico --version=$npm_package_electronVersion --version-string.ProductName=$npm_package_productName --version-string.ProductVersion=$npm_package_electronVersion && cd dist/WhatsDesktop-win32-ia32/ && zip -ryq9 ../WhatsDesktop-win32-\"$npm_package_version\".zip *",
+    "bw": "electron-packager . $npm_package_productName --overwrite --out=dist --ignore='^/dist$' --prune --platform=win32 --arch=ia32 --icon=media/logo.ico --version=$npm_package_electronVersion --version-string.ProductName=$npm_package_productName --version-string.ProductVersion=$npm_package_electronVersion && cd dist/WhatsDesktop-win32-ia32/ && zip -ryq9 ../WhatsDesktop-win32-\"$npm_package_version\".zip *"
   },
   "files": [
     "index.js",
@@ -42,6 +43,7 @@
   ],
   "dependencies": {
     "electron-debug": "^0.2.1",
+    "electron-packager": "^5.2.1",
     "electron-window-state": "^2.0.0"
   },
   "devDependencies": {

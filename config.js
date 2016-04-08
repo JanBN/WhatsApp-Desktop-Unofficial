@@ -4,7 +4,8 @@ const fs = require('fs');
 const path = require('path');
 const configFile = path.join(app.getPath('userData'), 'config.json');
 
-function readConfigFile() {
+function readConfigFile()
+{
   try {
     return JSON.parse(fs.readFileSync(configFile));
   } catch (err) {
@@ -12,11 +13,12 @@ function readConfigFile() {
   }
 }
 
-module.exports = {
+module.exports =
+{
   set: (key, value) => {
     const config = readConfigFile();
     config[key] = value;
     fs.writeFileSync(configFile, JSON.stringify(config));
   },
-  get: key => readConfigFile()[key]
+  get : (key, def)  => {return readConfigFile(def)[key] == undefined ? def : readConfigFile(def)[key];}
 };
