@@ -24,7 +24,7 @@
 
 
 *Requires OS X 10.8+, Linux or Windows.*
-
+*<strong>Note:</strong> I was not able to create osx package. Please build it on your own.*
 <br>
 ## Install
 
