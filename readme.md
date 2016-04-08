@@ -1,15 +1,13 @@
 # <img src="media/icon.png" width="45" align="left">&nbsp;WhatsApp-Desktop-Unofficial
 
-> Unofficial WhatsApp app
+> Unofficial WhatsApp app<br>
+> Heavily inspired and adapted from [WhatsApp-Desktop-Unofficial](https://github.com/mawie81/WhatsApp-Desktop-Unofficial) by [Marcel Wiehle](https://github.com/mawie81).
 
 <img src="promo.jpg" align="center">
 
-
-*Heavily inspired and adapted from [whatsdesktop](https://github.com/mawie81/whatsdesktop) by [Marcel Wiehle](https://github.com/mawie81).*
-
 *<strong>Note:</strong> In order to use this app a WhatsApp Web compatible device is required.*
 
-
+<br>
 ## Features
 
  - Custom clean theme
@@ -25,39 +23,36 @@
 
 
 
-<br>
-[![](media/screenshot.png)](https://github.com/mawie81/whatsdesktop/releases/latest)
-
 *Requires OS X 10.8+, Linux or Windows.*
 
+<br>
 ## Install
 
+### Mac
 
-
-[**Download**](https://github.com/mawie81/whatsdesktop/releases/latest), unzip, and move `WhatsDesktop.app` to the `/Applications` directory.
+[**Download**](https://github.com/JanBN/WhatsApp-Desktop-Unofficial/releases/latest), unzip, and move `WhatsApp-Desktop-Unofficial.app` to the `/Applications` directory.
 
 ### Linux
 
-[**Download**](https://github.com/mawie81/whatsdesktop/releases/latest) and unzip to some location.
+[**Download**](https://github.com/JanBN/WhatsApp-Desktop-Unofficial/releases/latest) and unzip to some location.
 
-To add a shortcut to the app, create a file in `~/.local/share/applications` called `whatsdesktop.desktop` with the following contents:
+To add a shortcut to the app, create a file in `~/.local/share/applications` called `WhatsApp-Desktop-Unofficial.desktop` with the following contents:
 
 ```
 [Desktop Entry]
-Name=WhatsDesktop
-Exec=/full/path/to/folder/whatsdesktop
+Name=WhatsApp-Desktop-Unofficial
+Exec=/full/path/to/folder/WhatsApp-Desktop-Unofficial
 Terminal=false
 Type=Application
-Icon=/full/path/to/folder/WhatsDesktop/resources/app/media/logo-symbol.png
+Icon=/full/path/to/folder/WhatsApp-Desktop-Unofficial/resources/app/media/icon.png
 ```
 
 ### Windows
 
-[**Download**](https://github.com/mawie81/whatsdesktop/releases/latest) and unzip to some location.
+[**Download**](https://github.com/JanBN/WhatsApp-Desktop-Unofficial/releases/tag/1.0.0) and unzip to some location.<br>
+Run WhatsApp-Desktop-Unofficial.exe
 
-Run WhatsDesktop.exe
-
-
+<br>
 ## License
 
 MIT © [Jan Pivarcek](http://blowingnose.com)
