@@ -1,7 +1,7 @@
 # <img src="media/icon.png" width="45" align="left">&nbsp;WhatsApp-Desktop-Unofficial
 
 > Unofficial WhatsApp app<br>
-> Heavily inspired and adapted from [WhatsApp-Desktop-Unofficial](https://github.com/mawie81/whatsdesktop) by [Marcel Wiehle](https://github.com/mawie81).
+> Heavily inspired and adapted from [whatsdesktop](https://github.com/mawie81/whatsdesktop) by [Marcel Wiehle](https://github.com/mawie81).
 
 <img src="promo.jpg" align="center">
 
