@@ -28,9 +28,6 @@
 <br>
 ## Install
 
-### Mac
-
-[**Download**](https://github.com/JanBN/WhatsApp-Desktop-Unofficial/releases/latest), unzip, and move `WhatsApp-Desktop-Unofficial.app` to the `/Applications` directory.
 
 ### Linux
 
