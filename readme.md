@@ -1,10 +1,26 @@
-# <img src="media/logo.png" width="45" align="left">&nbsp;WhatsDesktop
+# <img src="promo.jpg" width="45" align="left">&nbsp;WhatsApp-Desktop-Unofficial
 
 > Unofficial WhatsApp app
 
-*Heavily inspired and adapted from [Caprine](https://github.com/sindresorhus/caprine) by [Sindre Sorhus](https://github.com/sindresorhus).*
+*Heavily inspired and adapted from [whatsdesktop](https://github.com/mawie81/whatsdesktop) by [Marcel Wiehle](https://github.com/mawie81).*
 
 *<strong>Note:</strong> In order to use this app a WhatsApp Web compatible device is required.*
+
+
+## Features
+
+ - Custom clean theme
+ - Minimaze in tray
+ - Notifications
+ - Click on tray icon shows/hides app
+ - Ctrl+w hides window
+ - Alt - shows menu 
+
+
+
+
+
+
 
 <br>
 [![](media/screenshot.png)](https://github.com/mawie81/whatsdesktop/releases/latest)
@@ -13,15 +29,7 @@
 
 ## Install
 
-### OS X
 
-#### [Homebrew Cask](http://caskroom.io)
-
-```
-$ brew cask install whatsdesktop
-```
-
-#### Manually
 
 [**Download**](https://github.com/mawie81/whatsdesktop/releases/latest), unzip, and move `WhatsDesktop.app` to the `/Applications` directory.
 
@@ -46,19 +54,7 @@ Icon=/full/path/to/folder/WhatsDesktop/resources/app/media/logo-symbol.png
 
 Run WhatsDesktop.exe
 
-## Dev
-
-Built with [Electron](http://electron.atom.io).
-
-###### Commands
-
-- Init: `$ npm install`
-- Run: `$ npm start`
-- Build OS X: `$ npm run build-osx`
-- Build Linux: `$ npm run build-linux`
-- Build all: `$ npm run build` *(OS X only)*
-
 
 ## License
 
-MIT © [Marcel Wiehle](http://marcel.wiehle.me)
+MIT © [Jan Pivarcek](http://blowingnose.com)
