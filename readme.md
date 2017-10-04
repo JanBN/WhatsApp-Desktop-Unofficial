@@ -1,15 +1,24 @@
 # <img src="media/logo.png" width="45" align="left">&nbsp;WhatsDesktop
 
-> Unofficial WhatsApp app
+> Unofficial WhatsApp app with tray notification and shortcut
 
 *Heavily inspired and adapted from [Caprine](https://github.com/sindresorhus/caprine) by [Sindre Sorhus](https://github.com/sindresorhus).*
 
-*<strong>Note:</strong> In order to use this app a WhatsApp Web compatible device is required.*
 
 <br>
-[![](media/screenshot.png)](https://github.com/mawie81/whatsdesktop/releases/latest)
+<img src="promo.jpg" align="center">
 
 *Requires OS X 10.8+, Linux or Windows.*
+
+
+## Features		
+ - - Custom clean theme		
+ - - Minimaze in tray		
+ - - Notifications		
+ - - Click on tray icon shows/hides app		
+ - - Ctrl+w hides window		
+ - - Alt - shows menu 		
+
 
 ## Install
 
