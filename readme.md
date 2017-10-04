@@ -13,52 +13,14 @@
 
 ## Install
 
-### OS X
-
-#### [Homebrew Cask](http://caskroom.io)
-
 ```
-$ brew cask install whatsdesktop
+npm install
+npm start
 ```
 
-#### Manually
-
-[**Download**](https://github.com/mawie81/whatsdesktop/releases/latest), unzip, and move `WhatsDesktop.app` to the `/Applications` directory.
-
-### Linux
-
-[**Download**](https://github.com/mawie81/whatsdesktop/releases/latest) and unzip to some location.
-
-To add a shortcut to the app, create a file in `~/.local/share/applications` called `whatsdesktop.desktop` with the following contents:
+## Build exe
 
 ```
-[Desktop Entry]
-Name=WhatsDesktop
-Exec=/full/path/to/folder/whatsdesktop
-Terminal=false
-Type=Application
-Icon=/full/path/to/folder/WhatsDesktop/resources/app/media/logo-symbol.png
+electron-packager .  --overwrite --out=dist --ignore='^/dist$' --prune --platform=win32 --arch=ia32 --icon=media/logo.ico   && cd dist/WhatsDesktop-win32-ia32/ && zip -ryq9 ../WhatsDesktop-win32-\"$npm_package_version\".zip *
 ```
 
-### Windows
-
-[**Download**](https://github.com/mawie81/whatsdesktop/releases/latest) and unzip to some location.
-
-Run WhatsDesktop.exe
-
-## Dev
-
-Built with [Electron](http://electron.atom.io).
-
-###### Commands
-
-- Init: `$ npm install`
-- Run: `$ npm start`
-- Build OS X: `$ npm run build-osx`
-- Build Linux: `$ npm run build-linux`
-- Build all: `$ npm run build` *(OS X only)*
-
-
-## License
-
-MIT © [Marcel Wiehle](http://marcel.wiehle.me)
