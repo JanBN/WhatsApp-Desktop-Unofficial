@@ -7,9 +7,7 @@
 
 <br>
 <img src="promo.jpg" align="center">
-
-*Requires OS X 10.8+, Linux or Windows.*
-
+<br>
 
 ## Features		
  - - Custom clean theme		
