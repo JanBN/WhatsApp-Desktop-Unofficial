@@ -1,55 +1,64 @@
-# <img src="media/icon.png" width="45" align="left">&nbsp;WhatsApp-Desktop-Unofficial
+# <img src="media/logo.png" width="45" align="left">&nbsp;WhatsDesktop
 
-> Unofficial WhatsApp app<br>
-> Heavily inspired and adapted from [whatsdesktop](https://github.com/mawie81/whatsdesktop) by [Marcel Wiehle](https://github.com/mawie81).
+> Unofficial WhatsApp app
 
-<img src="promo.jpg" align="center">
+*Heavily inspired and adapted from [Caprine](https://github.com/sindresorhus/caprine) by [Sindre Sorhus](https://github.com/sindresorhus).*
 
 *<strong>Note:</strong> In order to use this app a WhatsApp Web compatible device is required.*
 
 <br>
-## Features
-
- - Custom clean theme
- - Minimaze in tray
- - Notifications
- - Click on tray icon shows/hides app
- - Ctrl+w hides window
- - Alt - shows menu 
-
-
-
-
-
-
+[![](media/screenshot.png)](https://github.com/mawie81/whatsdesktop/releases/latest)
 
 *Requires OS X 10.8+, Linux or Windows.*
-*<strong>Note:</strong> I was not able to create osx package. Please build it on your own.*
-<br>
+
 ## Install
 
+### OS X
+
+#### [Homebrew Cask](http://caskroom.io)
+
+```
+$ brew cask install whatsdesktop
+```
+
+#### Manually
+
+[**Download**](https://github.com/mawie81/whatsdesktop/releases/latest), unzip, and move `WhatsDesktop.app` to the `/Applications` directory.
 
 ### Linux
 
-[**Download**](https://github.com/JanBN/WhatsApp-Desktop-Unofficial/releases/latest) and unzip to some location.
+[**Download**](https://github.com/mawie81/whatsdesktop/releases/latest) and unzip to some location.
 
-To add a shortcut to the app, create a file in `~/.local/share/applications` called `WhatsApp-Desktop-Unofficial.desktop` with the following contents:
+To add a shortcut to the app, create a file in `~/.local/share/applications` called `whatsdesktop.desktop` with the following contents:
 
 ```
 [Desktop Entry]
-Name=WhatsApp-Desktop-Unofficial
-Exec=/full/path/to/folder/WhatsApp-Desktop-Unofficial
+Name=WhatsDesktop
+Exec=/full/path/to/folder/whatsdesktop
 Terminal=false
 Type=Application
-Icon=/full/path/to/folder/WhatsApp-Desktop-Unofficial/resources/app/media/icon.png
+Icon=/full/path/to/folder/WhatsDesktop/resources/app/media/logo-symbol.png
 ```
 
 ### Windows
 
-[**Download**](https://github.com/JanBN/WhatsApp-Desktop-Unofficial/releases/tag/1.0.0) and unzip to some location.<br>
-Run WhatsApp-Desktop-Unofficial.exe
+[**Download**](https://github.com/mawie81/whatsdesktop/releases/latest) and unzip to some location.
 
-<br>
+Run WhatsDesktop.exe
+
+## Dev
+
+Built with [Electron](http://electron.atom.io).
+
+###### Commands
+
+- Init: `$ npm install`
+- Run: `$ npm start`
+- Build OS X: `$ npm run build-osx`
+- Build Linux: `$ npm run build-linux`
+- Build all: `$ npm run build` *(OS X only)*
+
+
 ## License
 
-MIT © [Jan Pivarcek](http://blowingnose.com)
+MIT © [Marcel Wiehle](http://marcel.wiehle.me)

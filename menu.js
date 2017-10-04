@@ -40,10 +40,10 @@ const darwinTpl = [
   {
     label: appName,
     submenu: [
-      // {
-      //   label: `About ${appName}`,
-      //   role: 'about'
-      // },
+      {
+        label: `About ${appName}`,
+        role: 'about'
+      },
       {
         type: 'separator'
       },
@@ -184,26 +184,26 @@ const linuxTpl = [
 ];
 
 const winTpl = [
-  // {
-  //   label: 'Edit',
-  //   submenu: [
-  //     {
-  //       label: 'Cut',
-  //       accelerator: 'CmdOrCtrl+X',
-  //       role: 'cut'
-  //     },
-  //     {
-  //       label: 'Copy',
-  //       accelerator: 'CmdOrCtrl+C',
-  //       role: 'copy'
-  //     },
-  //     {
-  //       label: 'Paste',
-  //       accelerator: 'CmdOrCtrl+V',
-  //       role: 'paste'
-  //     }
-  //   ]
-  // },
+  {
+    label: 'Edit',
+    submenu: [
+      {
+        label: 'Cut',
+        accelerator: 'CmdOrCtrl+X',
+        role: 'cut'
+      },
+      {
+        label: 'Copy',
+        accelerator: 'CmdOrCtrl+C',
+        role: 'copy'
+      },
+      {
+        label: 'Paste',
+        accelerator: 'CmdOrCtrl+V',
+        role: 'paste'
+      }
+    ]
+  },
 
   {
     label: 'Theme',
@@ -257,37 +257,46 @@ const winTpl = [
           configStore.set('closeToTray', item.checked);
         }
       },
+      {
+        label: 'Ballon Notifications',
+        type: 'checkbox',
+        checked: configStore.get('ballonNotifications', true),
+        click(item) {
+          configStore.set('ballonNotifications', item.checked);
+          module.exports.webContents.send('reload');
+        }
+      },
 
     ]
   },
-  // {
-  //   label: 'Help',
-  //   role: 'help'
-  // }
+  {
+    label: 'Help',
+    role: 'help'
+  }
 ];
 
-// const helpSubmenu = [
-//   {
-//     label: `${appName} Website...`,
-//     click() {
-//       shell.openExternal('https://github.com/mawie81/whatsdesktop');
-//     }
-//   },
-//   {
-//     label: 'Report an Issue...',
-//     click() {
-//       const body = `
-// **Please succinctly describe your issue and steps to reproduce it.**
+const helpSubmenu = [
+  {
+    label: `${appName} Website...`,
+    click() {
+      shell.openExternal('https://github.com/mawie81/whatsdesktop');
+    }
+  },
+  {
+    label: 'Report an Issue...',
+    click() {
+      const body = `
+**Please succinctly describe your issue and steps to reproduce it.**
 
-// -
+-
 
-// ${app.getName()} ${app.getVersion()}
-// ${process.platform} ${process.arch} ${os.release()}`;
+${app.getName()} ${app.getVersion()}
+${process.platform} ${process.arch} ${os.release()}`;
 
-//       shell.openExternal(`https://github.com/mawie81/whatsdesktop/issues/new?body=${encodeURIComponent(body)}`);
-//     }
-//   }
-// ];
+      shell.openExternal(`https://github.com/mawie81/whatsdesktop/issues/new?body=${encodeURIComponent(body)}`);
+    }
+  }
+];
 
 let tpl;
 if (process.platform === 'darwin') {
@@ -298,7 +307,7 @@ if (process.platform === 'darwin') {
   tpl = linuxTpl;
 }
 
-// tpl[tpl.length - 1].submenu = helpSubmenu;
+tpl[tpl.length - 1].submenu = helpSubmenu;
 
 module.exports = {
   mainMenu: Menu.buildFromTemplate(tpl),

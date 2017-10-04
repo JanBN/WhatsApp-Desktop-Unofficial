@@ -1,0 +1,46 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "0.1.0",
+    "showOutput": "always",
+    "tasks": [
+        {
+            "taskName": "run",
+            "isShellCommand": true,
+            "command": "electron",
+            "args": [
+                "."
+            ]
+        },
+        {
+            "taskName": "build",
+            "isBuildCommand": true,
+            "command": "buildWin.cmd"
+        },
+        {
+            "taskName": "activate AVE",
+            "command": "${workspaceRoot}/config/AVE/activate.cmd"
+        },
+        {
+            "taskName": "activate SD",
+            "command": "${workspaceRoot}/config/SD/activate.cmd"
+        },
+        {
+            "taskName": "activate Busline",
+            "command": "${workspaceRoot}/config/Busline/activate.cmd"
+        },
+        {
+            "taskName": "build AVE",
+            "command": "${workspaceRoot}/config/AVE/build.cmd"
+        },
+        {
+            "taskName": "build SD",
+            "command": "${workspaceRoot}/config/SD/build.cmd"
+        },
+        {
+            "taskName": "build Busline",
+            "command": "${workspaceRoot}/config/Busline/build.cmd"
+        }        
+
+    ]
+}

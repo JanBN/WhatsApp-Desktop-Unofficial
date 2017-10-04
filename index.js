@@ -31,6 +31,7 @@ function updateBadge(title) {
   } else {
     appIcon.setImage(path.join(__dirname, 'media', 'tray.png'));
   }
+
 }
 
 function createMainWindow()
@@ -52,11 +53,11 @@ function createMainWindow()
     height: mainWindowState.height,
     minWidth: 400,
     minHeight: 200,
-    'auto-hide-menu-bar': true,
+    autoHideMenuBar: true,    
     webPreferences: {
       nodeIntegration: true,
       webSecurity: false,
-      plugins: true
+      plugins: true,
     }
   });
 
@@ -64,9 +65,40 @@ function createMainWindow()
 
   mainWindowState.manage(win);
 
-  win.loadURL('file://' + __dirname + '/index.html', {
-    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'
+  // win.loadURL('https://web.whatsapp.com', {
+  //   userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'
+  // });
+
+
+  win.webContents.session.setPermissionRequestHandler((webContents, permission, callback) => {
+    // if (webContents.getURL() === host) {
+      if (permission === 'notifications' && !configStore.get('ballonNotifications', true) ) {
+        callback(false); // denied.
+        return;
+      // }
+    }
+  
+    callback(true);
   });
+
+  // console.log(win.webContents.session.setPermissionRequestHandler);
+  // session.fromPartition(webview.partition).setPermissionRequestHandler()
+
+  // win.webContents.session.setPermissionRequestHandler(
+  //   function permissionRequestHandler(webContents, permission, callback) {
+
+  //     console.log('a4');
+  //    // Place a breakpoint here while debugging with the --inspect-brk command line switch
+  //    return callback(false);
+  //   }
+  // );  
+
+  // console.log('a2');
+
+  win.loadURL('file://' + __dirname + '/index.html');
+
+  const ses = win.webContents.session
+  console.log(ses.getUserAgent())
 
   win.on('closed', () => app.quit);
   win.on('page-title-updated', (e, title) => updateBadge(title));
@@ -88,12 +120,15 @@ function createMainWindow()
       win.hide();
     }
   });
+
+
+
   return win;
 }
 
 function createTray() {
-  appIcon = new Tray(path.join(__dirname, 'media', 'tray.png'));
-  appIcon.setPressedImage(path.join(__dirname, 'media', 'tray.png'));
+  appIcon = new Tray(path.join(__dirname, 'media', 'logo-tray.png'));
+  appIcon.setPressedImage(path.join(__dirname, 'media', 'logo-tray-white.png'));
   appIcon.setContextMenu(appMenu.trayMenu);
    // appIcon.setToolTip('This is my application.');
 
@@ -162,6 +197,7 @@ app.on('ready', () => {
   {
     mainWindow.hide();
   });
+  
 });
 
 app.on('window-all-closed', () => {
